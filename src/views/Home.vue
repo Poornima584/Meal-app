@@ -1,18 +1,38 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    <meal-world :meal="randomMeal"></meal-world>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
+import { mapActions, mapState } from "vuex";
+import MealWorld from "../components/MealWorld.vue";
 
 export default {
   name: "Home",
   components: {
-    HelloWorld,
+    MealWorld,
+  },
+  computed: {
+    ...mapState(["randomMeal"]),
+  },
+  created() {
+    this.getRandomMeal();
+  },
+  methods: {
+    ...mapActions(["getRandomMeal"]),
   },
 };
 </script>
+
+<style scoped>
+.home {
+  min-height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 80px;
+  padding-bottom: 53px;
+}
+</style>
